@@ -24,7 +24,7 @@ Plugin works using the [nekos.life](https://nekos.life) API endpoints to get ima
 
 Firstly, make sure that you have Git and Java (JDK) installed.
 
-Clone this repo using `git clone https://github.com/Vz0n/NekoFetcher`, then open a console (if on Windows use Git Bash) on the source directory and run `./gradlew build`. Next drop the jar built in `build/libs/NekoFetcher-x.x.x.jar` on your server's `plugins` folder and restart.
+Clone this repo using `git clone https://github.com/Vz0n/NekoFetcher`, then open a console on the source directory and run `./gradlew build` or `.\gradlew.bat build` depending of your operating system. Next drop the jar built in `build/libs/NekoFetcher-x.x.x.jar` on your server's `plugins` folder and restart.
 
 You should have the plugin working now. Bugs can be reported on the issues section.
 

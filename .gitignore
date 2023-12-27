@@ -1,11 +1,8 @@
 # Build files
 build/
 .gradle/
+bin/
 # IDE/Code editor files
 .idea/
-.code/
+.vscode/
 *.iml
-
-
-
-
