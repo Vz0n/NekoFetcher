@@ -3,3 +3,8 @@ version: 1.0
 author: Vz0n
 main: io.github.Vz0n.neko.NekoFetcher
 description: 'Get neko images in your maps.'
+commands:
+  nget:
+    aliases: [nekoget]
+    description: "Get a neko image"
+    

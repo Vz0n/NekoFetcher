@@ -2,12 +2,20 @@ package io.github.Vz0n.neko;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
+import io.github.Vz0n.neko.command.NGetCommand;
+import io.github.Vz0n.neko.image.ImageProvider;
+import io.github.Vz0n.neko.image.impl.NekosLifeProvider;
+
 public class NekoFetcher extends JavaPlugin {
+
+    // Start default provider
+    public final ImageProvider DEFAULT_PROVIDER = new NekosLifeProvider();
 
     @Override
     public void onEnable() {
        getLogger().info("Enabling plugin...");
-       // Do stuff
+       this.getServer().getPluginCommand("nget")
+                .setExecutor(new NGetCommand(DEFAULT_PROVIDER));
        getLogger().info("Plugin enabled!");
     }
 
