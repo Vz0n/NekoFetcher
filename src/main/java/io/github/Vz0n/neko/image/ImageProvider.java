@@ -5,4 +5,5 @@ import org.bukkit.map.MapView;
 public interface ImageProvider {
     
     public MapView getImage(MapView map);
+    
 }

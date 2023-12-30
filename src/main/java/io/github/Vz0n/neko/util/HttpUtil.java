@@ -2,6 +2,7 @@ package io.github.Vz0n.neko.util;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Map;
 import java.net.URL;
 
 import javax.annotation.Nullable;
@@ -16,7 +17,7 @@ public class HttpUtil {
     private static JSONParser parser = new JSONParser();
 
     @Nullable
-    public static JSONObject getJSONResponse(String url){
+    public static Map<String, String> getJSONResponse(String url){
 
         try{
           HttpsURLConnection htsconn = (HttpsURLConnection) 
