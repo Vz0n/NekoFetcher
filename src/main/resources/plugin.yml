@@ -1,10 +1,14 @@
 name: NekoFetcher
 version: 1.0
 author: Vz0n
+api-version: 1.13
 main: io.github.Vz0n.neko.NekoFetcher
 description: 'Get neko images in your maps.'
 commands:
   nget:
     aliases: [nekoget]
     description: "Get a neko image"
+  neko:
+    aliases: [nekofetcher, nekof]
+    description: "Main NekoFetcher command."
     

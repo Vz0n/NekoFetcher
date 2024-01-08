@@ -1,11 +1,13 @@
 package io.github.Vz0n.neko.util;
 
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Map;
 import java.net.URL;
 
 import javax.annotation.Nullable;
+import javax.imageio.ImageIO;
 import javax.net.ssl.HttpsURLConnection;
 
 import org.json.simple.JSONObject;
@@ -17,17 +19,14 @@ public class HttpUtil {
     private static JSONParser parser = new JSONParser();
 
     @Nullable
-    public static Map<String, String> getJSONResponse(String url){
+    public static JSONObject getJSONResponse(String url) throws IOException, ParseException {
 
-        try{
           HttpsURLConnection htsconn = (HttpsURLConnection) 
                                new URL(url).openConnection();
 
-          if(htsconn.getResponseCode() != 200){
-            // getLogger().severe("A requested provider didn't answer properly. Status code:", 
-            //                 htsconn.getResponseCode());
-            return null;
-          }
+          // Server is not available
+          if(htsconn.getResponseCode() != 200) return null;
+    
             
           InputStream stream = htsconn.getInputStream();
           JSONObject obj = (JSONObject) parser.parse(
@@ -35,16 +34,23 @@ public class HttpUtil {
           );
                
           return obj;
-  
-        } catch(IOException e){
-            // Error happened on the connection.
-            // getLogger().severe("Error connecting to a provider!", e.getCause())
-            return null;
-        } catch(ParseException e){
-            // Server didn't return JSON data.
-            // getLogger().severe("Error parsing data from provider!", e.getCause())
-            return null;
-        }
     }
-    
+ 
+    @Nullable
+    public static BufferedImage getImage(String url) throws IOException {
+      
+      HttpsURLConnection conn = (HttpsURLConnection) 
+                               new URL(url).openConnection();
+
+      // Response isn't a image and/or server is unavailable.
+      // nekos.life doesn't return a image when it's down.
+      if(!conn.getContentType().startsWith("image/")) return null;
+
+      BufferedImage img = ImageIO.read(conn.getInputStream());
+      Graphics graphic = img.getGraphics();
+      graphic.drawImage(img, 0, 0, 128, 128, null);
+      graphic.dispose();
+
+      return img;
+    }
 }

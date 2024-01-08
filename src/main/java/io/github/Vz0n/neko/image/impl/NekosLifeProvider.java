@@ -9,8 +9,11 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Map;
+import java.util.logging.Logger;
 
+import org.bukkit.map.MapRenderer;
 import org.bukkit.map.MapView;
+import org.json.simple.parser.ParseException;
 
 import io.github.Vz0n.neko.image.ImageProvider;
 import io.github.Vz0n.neko.renderer.NekoRenderer;
@@ -18,43 +21,46 @@ import io.github.Vz0n.neko.util.HttpUtil;
 
 public class NekosLifeProvider implements ImageProvider {
 
-    private final String DEFAULT_ENDPOINT = "https://nekos.life/api/v2/image/neko";
+    private final String DEFAULT_ENDPOINT = "https://nekos.life/api/v2/img/neko";
+    private Logger logger;
     
-    @Nullable
+    // We need a logger to show errors on console.
+    // TODO: improve this
+    public NekosLifeProvider(Logger pluginLogger){
+      this.logger = pluginLogger;
+    }
+
     public MapView getImage(MapView map){
-
-        Map<String, String> resp = HttpUtil.getJSONResponse(DEFAULT_ENDPOINT);
-
-        if(resp == null){ 
-          // Return the same object, indicating an error.
-          return null;
-        }
 
         try{
 
-          URL url = new URL(resp.get("url"));
-          HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
-          
-          if(conn.getResponseCode() != 200 && 
-                            !conn.getContentType().startsWith("image/")){
-              return null;
-          }
+            // Fetch endpoint
+            Map<String, String> resp = HttpUtil.getJSONResponse(DEFAULT_ENDPOINT);
 
-          BufferedImage img = ImageIO.read(conn.getInputStream());
-          Graphics graphic = img.getGraphics();
-          graphic.drawImage(img, 0, 0, 64, 64, null);
-          graphic.dispose();
+            // Server is unavailable for requests
+            if(resp == null) return null;
+            
+            // Get image returned from endpoint
+            BufferedImage image = HttpUtil.getImage(resp.get("url"));
+            
+            // Server returned a non-image response
+            if(image == null) return null;
           
-          map.addRenderer(
-              new NekoRenderer(img)
-          );
+            // Set the map renderer and lock it.
+            map.addRenderer(
+               new NekoRenderer(image)
+            );
+            map.setLocked(true);
 
-          return map;
+            return map;
 
         } catch(IOException e){
-
-          return null;
+            logger.warning("An exception ocurred while fetching the image: " + e.getMessage());
+            return map;
           
+        } catch(ParseException e){
+            logger.warning("An exception ocurred while parsing data: " + e.getMessage());
+            return map;
         }
         
     }

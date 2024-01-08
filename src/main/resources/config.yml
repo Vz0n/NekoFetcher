@@ -1,0 +1,7 @@
+# NekoFetcher v0.1 by Vz0n
+# Edit config as you want, just read the description of every option!
+messages:
+  filled_map_not_in_hand: "You need to have a filled map on your hand."
+  getting_neko_image: "Getting your image..."
+  success_getting_image: "Something didn't go well..."
+  error_getting_image: "Go with your neko UwU!"
