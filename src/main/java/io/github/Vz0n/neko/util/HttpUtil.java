@@ -1,6 +1,5 @@
 package io.github.Vz0n.neko.util;
 
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -43,14 +42,13 @@ public class HttpUtil {
                                new URL(url).openConnection();
 
       // Response isn't a image and/or server is unavailable.
-      // nekos.life doesn't return a image when it's down.
       if(!conn.getContentType().startsWith("image/")) return null;
 
-      BufferedImage img = ImageIO.read(conn.getInputStream());
-      Graphics graphic = img.getGraphics();
-      graphic.drawImage(img, 0, 0, 128, 128, null);
-      graphic.dispose();
+      return ImageIO.read(conn.getInputStream());
+    }
 
-      return img;
+    // Checks that the URL is valid and is not a SSRF attempt
+    private boolean checkUrl(String url){
+      return url.matches("^(http|https):");
     }
 }

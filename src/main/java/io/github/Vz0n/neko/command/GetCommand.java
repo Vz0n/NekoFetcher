@@ -15,11 +15,11 @@ import io.github.Vz0n.neko.util.NekoConfiguration;
 
 public class GetCommand implements CommandExecutor {
 
-    private ImageProvider provider;
     private NekoConfiguration config;
+    private ImageProvider provider;
 
-    public GetCommand(ImageProvider provider, NekoConfiguration config){
-        this.provider = provider;
+    public GetCommand(NekoConfiguration config, ImageProvider imgProvider){
+        this.provider = imgProvider;
         this.config = config;
     }
 
@@ -39,7 +39,7 @@ public class GetCommand implements CommandExecutor {
             MapMeta mapMeta = (MapMeta) item.getItemMeta();
             MapView view = provider.getImage(mapMeta.getMapView());
 
-            if(view == mapMeta.getMapView()){
+            if(view.equals(mapMeta.getMapView())){
                 p.sendMessage(config.getDecoratedMessage("error_getting_image"));
                 return false;
             }

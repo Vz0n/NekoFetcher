@@ -1,12 +1,14 @@
 # NekoFetcher
 
+![Preview](image/preview.png)
+
 (Not too) Simple plugin to fetch and draw cute anime neko images on in-game maps.
 
 The main idea behind this, is fun and give some anime servers (if they exist) something with they can decorate stuff and have fun with. Although that the main reason of this plugin, you're free of adding it to your server's plugin list indepently of what the server is.
 
 Plugin works using the [nekos.life](https://nekos.life) API endpoints to get images, so if you have a outbound firewall add this site to the whitelist.
 
-**NOTE:** This plugin is completly SFW, it doesn't and will never have a "NSFW mode" because on top of that is morbid, it breaks the Mojang's EULA.
+**NOTE:** This plugin is completly SFW, it doesn't and will never have a "NSFW mode". That's morbid and it breaks the Mojang's EULA.
 
 ## To-do features 
 
@@ -18,7 +20,7 @@ Plugin works using the [nekos.life](https://nekos.life) API endpoints to get ima
 ## Compatibility and support
 
 - Software: Paper and its forks, as the plugin **only** uses and support that API. You can still test on plain Spigot but no support will be provided.
-- Version: 1.20.x, don't want to suffer porting it to old and deprecated versions.
+- Version: 1.20.x supported only.
 
 ## Compiling and installing
 

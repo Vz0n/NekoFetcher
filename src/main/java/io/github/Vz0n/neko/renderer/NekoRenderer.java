@@ -12,11 +12,6 @@ public class NekoRenderer extends MapRenderer {
     private Image image;
     private boolean rendered;
 
-    public NekoRenderer(Image image){
-        super();
-        this.image = image;
-    }
-
     public void render(MapView view, MapCanvas canvas, Player player){
         if(rendered) return;
 
@@ -24,4 +19,11 @@ public class NekoRenderer extends MapRenderer {
         rendered = true;
     }
     
+    public void setImage(Image newImage){
+        this.image = newImage;
+    }
+
+    public boolean hasImage(){
+        return image != null;
+    }
 }

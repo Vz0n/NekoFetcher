@@ -1,7 +1,25 @@
 # NekoFetcher v0.1 by Vz0n
 # Edit config as you want, just read the description of every option!
+#
+# Main plugin prefix and messages
+prefix: "<#4a11b0>Neko<#a7d11d>Fetcher<reset> |"
 messages:
-  filled_map_not_in_hand: "You need to have a filled map on your hand."
-  getting_neko_image: "Getting your image..."
-  success_getting_image: "Something didn't go well..."
-  error_getting_image: "Go with your neko UwU!"
+  filled_map_not_in_hand: "<red>You need to have a filled map on your hand."
+  getting_neko_image: "<i><gray>Getting your image..."
+  success_getting_image: "<red>Something didn't go well..."
+  error_ratelimited: "<red>You can get a new neko image on %time"
+  error_getting_image: "<green>Go with your neko UwU!"
+
+# We should limit player's command usage per an amount of time?
+# Suggestion: Keep this enabled
+ratelimit:
+  enabled: true
+  options:
+    # Time units can be (s)econds, (m)inutes or (h)ours
+    time: "1m"
+    # Limit of images that can be obtained during time
+    amount: 3
+
+
+# Don't edit this, it may cause an error. 
+version: 1
