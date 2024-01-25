@@ -14,12 +14,11 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class HttpUtil {
-    
-    private static JSONParser parser = new JSONParser();
 
     @Nullable
     public static JSONObject getJSONResponse(String url) throws IOException, ParseException {
 
+          JSONParser parser = new JSONParser();
           HttpsURLConnection htsconn = (HttpsURLConnection) 
                                new URL(url).openConnection();
 
@@ -33,22 +32,20 @@ public class HttpUtil {
           );
                
           return obj;
+          
     }
  
     @Nullable
-    public static BufferedImage getImage(String url) throws IOException {
+    public static BufferedImage getImage(String url) throws IOException {      
       
-      HttpsURLConnection conn = (HttpsURLConnection) 
+        HttpsURLConnection conn = (HttpsURLConnection) 
                                new URL(url).openConnection();
 
-      // Response isn't a image and/or server is unavailable.
-      if(!conn.getContentType().startsWith("image/")) return null;
+        // Response isn't a image and/or server is unavailable.
+        if(!conn.getContentType().startsWith("image/")) return null;
 
-      return ImageIO.read(conn.getInputStream());
+        return ImageIO.read(conn.getInputStream());
+
     }
 
-    // Checks that the URL is valid and is not a SSRF attempt
-    private boolean checkUrl(String url){
-      return url.matches("^(http|https):");
-    }
 }

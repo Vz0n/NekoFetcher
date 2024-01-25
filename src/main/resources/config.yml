@@ -4,21 +4,22 @@
 # Main plugin prefix and messages
 prefix: "<#4a11b0>Neko<#a7d11d>Fetcher<reset> |"
 messages:
-  filled_map_not_in_hand: "<red>You need to have a filled map on your hand."
-  getting_neko_image: "<i><gray>Getting your image..."
-  success_getting_image: "<red>Something didn't go well..."
-  error_ratelimited: "<red>You can get a new neko image on %time"
-  error_getting_image: "<green>Go with your neko UwU!"
+  neko_command_header: '%prefix% <i><gray>This server is using NekoFetcher, a plugin made by Vz0n.'
+  filled_map_not_in_hand: "%prefix% <red>You need to have a filled map on your hand."
+  getting_neko_image: "%prefix% <i><gray>Getting your image..."
+  success_getting_image: "%prefix% <red>Something didn't go well..."
+  error_ratelimited: "%prefix% <red>You can get a new neko image on %time"
+  error_getting_image: "%prefix% <green>Go with your neko UwU!"
 
-# We should limit player's command usage per an amount of time?
+# We should limit player's command usages per an amount of time?
 # Suggestion: Keep this enabled
-ratelimit:
+cooldown:
   enabled: true
   options:
-    # Time units can be (s)econds, (m)inutes or (h)ours
-    time: "1m"
+    # Time in seconds
+    time: 520
     # Limit of images that can be obtained during time
-    amount: 3
+    imageLimit: 3
 
 
 # Don't edit this, it may cause an error. 
