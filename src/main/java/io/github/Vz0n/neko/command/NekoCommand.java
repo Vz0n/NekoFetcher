@@ -8,7 +8,6 @@ import com.google.inject.Inject;
 
 import io.github.Vz0n.neko.classes.NekoConfiguration;
 
-// TODO: Main Command
 public class NekoCommand implements CommandExecutor {
 
     private NekoConfiguration config;

@@ -6,19 +6,20 @@ import io.github.Vz0n.neko.NekoFetcher;
 import io.github.Vz0n.neko.image.ImageProvider;
 import io.github.Vz0n.neko.image.impl.NekosLifeProvider;
 import io.github.Vz0n.neko.classes.NekoConfiguration;
-import io.github.Vz0n.neko.classes.CooldownContainer;
+import io.github.Vz0n.neko.classes.RatelimitContainer;
 
 public class AbstractNekoModule extends AbstractModule {
     
     private NekoFetcher pluginInstance;
     private NekoConfiguration configInstance;
-    private CooldownContainer cooldownInstance;
+    private RatelimitContainer cooldownInstance;
 
     public AbstractNekoModule(NekoFetcher plugin){
         this.pluginInstance = plugin;
         this.configInstance = new NekoConfiguration(plugin);
-        this.cooldownInstance = new CooldownContainer(plugin, 
-                                                configInstance.getCooldownTime());
+        this.cooldownInstance = new RatelimitContainer(plugin, 
+                                                configInstance.getCooldownTime(),
+                                                configInstance.getImageLimit());
     }  
 
     public void configure(){
@@ -28,7 +29,7 @@ public class AbstractNekoModule extends AbstractModule {
         // Instance bindings
         bind(NekoFetcher.class).toInstance(pluginInstance);
         bind(NekoConfiguration.class).toInstance(configInstance);
-        bind(CooldownContainer.class).toInstance(cooldownInstance);
+        bind(RatelimitContainer.class).toInstance(cooldownInstance);
         
     }
 

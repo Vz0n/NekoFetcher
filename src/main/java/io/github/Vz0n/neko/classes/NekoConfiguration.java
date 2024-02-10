@@ -27,16 +27,25 @@ public class NekoConfiguration {
         this.configFile = plugin.getConfig();
     }
 
-    public Component getDecoratedMessage(String key){
+    public Component getDecoratedMessage(String key, String token, String value){
         ConfigurationSection messagesSection = configFile.getConfigurationSection("messages");
+        String message = messagesSection.getString(key, "Missing message key: " + key)
+        .replace("%prefix%", configFile.getString("prefix"));
 
-        return MINI_MESSAGE.deserialize(
-            messagesSection.getString(key, "Missing message key: " + key)
-                           .replace("%prefix%", configFile.getString("prefix"))
-        );
+        // Look for variables
+        // TODO: make this more dynamic
+        if(token != null){
+            message = message.replace(token, value);
+        }
+
+        return MINI_MESSAGE.deserialize(message);
     }
 
-    // Return 
+    public Component getDecoratedMessage(String key){
+        
+        return this.getDecoratedMessage(key, null, null);
+    }
+
     public int getCooldownTime(){
 
         return configFile.getInt("cooldown.options.time", 520);
@@ -45,6 +54,11 @@ public class NekoConfiguration {
     public int getImageLimit(){
 
         return configFile.getInt("cooldown.options.imageLimit", 3);
+    }
+
+    public boolean isCooldownEnabled(){
+        
+        return configFile.getBoolean("cooldown.enabled", true);
     }
     
 }

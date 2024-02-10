@@ -8,7 +8,7 @@ messages:
   filled_map_not_in_hand: "%prefix% <red>You need to have a filled map on your hand."
   getting_neko_image: "%prefix% <i><gray>Getting your image..."
   success_getting_image: "%prefix% <red>Something didn't go well..."
-  error_ratelimited: "%prefix% <red>You can get a new neko image on %time"
+  error_ratelimited: "%prefix% <red>You can get a new neko image on %time% seconds."
   error_getting_image: "%prefix% <green>Go with your neko UwU!"
 
 # We should limit player's command usages per an amount of time?

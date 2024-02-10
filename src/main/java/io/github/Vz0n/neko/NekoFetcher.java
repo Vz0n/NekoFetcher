@@ -8,14 +8,16 @@ import com.google.inject.Injector;
 
 import io.github.Vz0n.neko.command.GetCommand;
 import io.github.Vz0n.neko.command.NekoCommand;
+import io.github.Vz0n.neko.image.ImageProvider;
 import io.github.Vz0n.neko.module.AbstractNekoModule;
 import io.github.Vz0n.neko.classes.NekoConfiguration;
-import io.github.Vz0n.neko.classes.CooldownContainer;
+import io.github.Vz0n.neko.classes.RatelimitContainer;
 
 public class NekoFetcher extends JavaPlugin {
 
     @Inject private NekoConfiguration config;
-    @Inject private CooldownContainer cooldownContainer;
+    @Inject private RatelimitContainer usesContainer;
+    @Inject private ImageProvider provider;
 
     @Override
     public void onEnable() {
@@ -34,8 +36,6 @@ public class NekoFetcher extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        // Clear players from PlayerCooldownContainer if there are.
-        this.cooldownContainer.clearPlayers();
         getLogger().info("Plugin disabled!");
     }
 
@@ -43,8 +43,12 @@ public class NekoFetcher extends JavaPlugin {
         return config;
     }
 
-    public CooldownContainer getCooldowns() {
-        return cooldownContainer;
+    public ImageProvider getImageProvider(){
+        return provider;
+    }
+
+    public RatelimitContainer getUsesContainer(){
+        return usesContainer;
     }
 
 }

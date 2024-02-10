@@ -13,62 +13,62 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.entity.Player;
 
 import io.github.Vz0n.neko.image.ImageProvider;
-import io.github.Vz0n.neko.classes.CooldownContainer;
+import io.github.Vz0n.neko.NekoFetcher;
 import io.github.Vz0n.neko.classes.NekoConfiguration;
 
 public class GetCommand implements CommandExecutor {
 
-    private NekoConfiguration config;
-    private ImageProvider provider;
-    private CooldownContainer cooldowns;
+    private NekoFetcher plugin;
 
     @Inject
-    public GetCommand(NekoConfiguration config, ImageProvider imgProvider, CooldownContainer container){
-        this.config = config;
-        this.provider = imgProvider;
-        this.cooldowns = container;
+    public GetCommand(NekoFetcher instance){
+        this.plugin = instance;
     }
 
-    public boolean onCommand(CommandSender executor, Command cmd, String label, String[] args){
-    
-        if(executor instanceof Player){
+    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
 
-            // Need to do this because Java doesn't let me to use
-            // new syntax with nested if
-            Player p = (Player) executor;
+        NekoConfiguration config = plugin.getNekoConfig();
+        ImageProvider provider = plugin.getImageProvider();
 
-            if(cooldowns.isInCooldown(p.getUniqueId())){
-                p.sendMessage(config.getDecoratedMessage("error_ratelimited"));
-                return false;
-            }
-    
-            ItemStack item = p.getInventory().getItemInMainHand();
-
-            if(item.getType() != Material.FILLED_MAP){
-                p.sendMessage(config.getDecoratedMessage("filled_map_not_in_hand"));
-                return false;
-            }
-            
-            p.sendMessage(config.getDecoratedMessage("getting_neko_image"));
-
-            MapMeta mapMeta = (MapMeta) item.getItemMeta();
-            MapView view = provider.getImage(mapMeta.getMapView());
-
-            if(view.equals(mapMeta.getMapView())){
-                p.sendMessage(config.getDecoratedMessage("error_getting_image"));
-                return false;
-            }
-              
-            item.setItemMeta(mapMeta);
-            p.sendMessage(config.getDecoratedMessage("success_getting_image"));
-            return true;
-
-        } else {
-
-            executor.sendMessage("You must be a player to use that command.");
+        if(!(sender instanceof Player)){
+            sender.sendMessage("You must be a player to use that command.");
             return false;
-
         }
+
+        Player player = (Player) sender;
+        ItemStack item = player.getInventory().getItemInMainHand();
+
+        if(config.isCooldownEnabled()){
+            long time = plugin.getUsesContainer().getRatelimit(player.getUniqueId());
+
+            if(time > 0L){
+                player.sendActionBar(config.getDecoratedMessage("error_ratelimited", 
+                                     "%time%", String.valueOf(time)));
+                return false;
+            }
+
+            plugin.getUsesContainer().addUse(player.getUniqueId());
+        }
+
+        if(item.getType() != Material.FILLED_MAP){
+            player.sendMessage(config.getDecoratedMessage("filled_map_not_in_hand"));
+            return false;
+        }
+            
+        player.sendMessage(config.getDecoratedMessage("getting_neko_image"));
+
+        MapMeta mapMeta = (MapMeta) item.getItemMeta();
+        MapView view = provider.getImage(mapMeta.getMapView());
+
+        if(view.equals(mapMeta.getMapView())){
+            player.sendMessage(config.getDecoratedMessage("error_getting_image"));
+            return false;
+        }
+              
+        item.setItemMeta(mapMeta);
+        player.sendMessage(config.getDecoratedMessage("success_getting_image"));
+        
+        return true;
 
     }
     
