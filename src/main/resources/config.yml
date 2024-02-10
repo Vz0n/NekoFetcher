@@ -22,5 +22,5 @@ cooldown:
     imageLimit: 3
 
 
-# Don't edit this, it may cause an error. 
-version: 1
+# Don't edit this, it will cause an error. 
+version: 1.0

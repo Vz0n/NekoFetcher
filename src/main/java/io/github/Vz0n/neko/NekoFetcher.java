@@ -39,6 +39,11 @@ public class NekoFetcher extends JavaPlugin {
         getLogger().info("Plugin disabled!");
     }
 
+    // Just reloads the config object.
+    public void reloadNekoConfig() {
+        config.reloadFromPlugin(this);
+    }
+
     public NekoConfiguration getNekoConfig() {
         return config;
     }

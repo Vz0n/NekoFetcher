@@ -13,16 +13,17 @@ import net.kyori.adventure.text.minimessage.MiniMessage;
 public class NekoConfiguration {
 
     private FileConfiguration configFile;
+    private File configFileHandle;
     private final MiniMessage MINI_MESSAGE = MiniMessage.miniMessage();
 
     public NekoConfiguration(Plugin plugin){
         // Verify if the main config file exists before setting our
         // FileConfiguration to the plugin's one.
         File dataFolder = plugin.getDataFolder();
-        File configFile = new File(dataFolder, "config.yml");
+        this.configFileHandle = new File(dataFolder, "config.yml");
 
         if(!dataFolder.exists()) dataFolder.mkdir();
-        if(!configFile.exists()) plugin.saveDefaultConfig();
+        if(!this.configFileHandle.exists()) plugin.saveDefaultConfig();
 
         this.configFile = plugin.getConfig();
     }
@@ -39,6 +40,11 @@ public class NekoConfiguration {
         }
 
         return MINI_MESSAGE.deserialize(message);
+    }
+
+    public void reloadFromPlugin(Plugin plugin){
+        plugin.reloadConfig();
+        this.configFile = plugin.getConfig();
     }
 
     public Component getDecoratedMessage(String key){
