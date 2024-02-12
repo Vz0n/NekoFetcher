@@ -8,7 +8,9 @@ commands:
   nget:
     aliases: [nekoget]
     description: "Get a neko image"
+    permission: "nekofetcher.nget"
   neko:
     aliases: [nekofetcher, nekof]
     description: "Main NekoFetcher command."
+    permission: "nekofetcher.neko"
     

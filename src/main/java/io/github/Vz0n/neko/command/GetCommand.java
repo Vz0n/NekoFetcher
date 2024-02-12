@@ -27,16 +27,14 @@ public class GetCommand implements CommandExecutor {
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
 
-        NekoConfiguration config = plugin.getNekoConfig();
-        ImageProvider provider = plugin.getImageProvider();
-
         if(!(sender instanceof Player)){
             sender.sendMessage("You must be a player to use that command.");
             return false;
         }
 
+        NekoConfiguration config = plugin.getNekoConfig();
+        ImageProvider provider = plugin.getImageProvider();
         Player player = (Player) sender;
-        ItemStack item = player.getInventory().getItemInMainHand();
 
         if(config.isCooldownEnabled()){
             long time = plugin.getUsesContainer().getRatelimit(player.getUniqueId());
@@ -49,6 +47,8 @@ public class GetCommand implements CommandExecutor {
 
             plugin.getUsesContainer().addUse(player.getUniqueId());
         }
+
+        ItemStack item = player.getInventory().getItemInMainHand();
 
         if(item.getType() != Material.FILLED_MAP){
             player.sendMessage(config.getDecoratedMessage("filled_map_not_in_hand"));

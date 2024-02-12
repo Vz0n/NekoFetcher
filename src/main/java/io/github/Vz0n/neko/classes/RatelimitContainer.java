@@ -6,11 +6,12 @@ import java.util.UUID;
 
 import org.bukkit.plugin.Plugin;
 
-// Class for storing player's cooldown time to use /nget.
+// Class for storing player's cooldown/limit time to use /nget.
 public class RatelimitContainer {
     
-    // The value of the key is a Integer array, where element 0 is the cooldown timestamp
-    // and element 1 is the n of uses by the user identified by UUID.
+    // The value of the HashMap is a Long array where:
+    // Value 0 is the timestamp when PlayerUses > nMaxUses was reached, if happened.
+    // Value 1 is the amount of uses of the command.
     private HashMap<UUID, Long[]> cooldownStore = new HashMap<>();
     private int cooldownTime;
     private int nMaxUses;
@@ -26,14 +27,18 @@ public class RatelimitContainer {
     public void addUse(UUID player){
 
         if(!this.cooldownStore.containsKey(player)){
-            this.cooldownStore.put(player, new Long[]{System.currentTimeMillis(), 1L});
+            this.cooldownStore.put(player, new Long[]{0L, 1L});
             return;
         }
 
-        Long[] times = this.cooldownStore.get(player);
-        times[1] = times[1] + 1L;
+        Long[] playerLimit = this.cooldownStore.get(player);
+        playerLimit[1] = playerLimit[1] + 1L;
 
-        this.cooldownStore.replace(player, times);
+        // Player reached the max uses, so we assign a timestamp to identify 
+        // when the limit was reached.
+        if(playerLimit[1] == nMaxUses) playerLimit[0] = System.currentTimeMillis();
+    
+        this.cooldownStore.replace(player, playerLimit);
     }
 
     private void removeCooldown(UUID player){
@@ -47,11 +52,11 @@ public class RatelimitContainer {
     // Returns the remaining time in seconds, in case that the player is ratelimited.
     public Long getRatelimit(UUID player){
 
-        Long[] playerTime = cooldownStore.getOrDefault(player, new Long[]{0L, 0L});
+        Long[] playerLimit = cooldownStore.getOrDefault(player, new Long[]{0L, 0L});
+    
+        if(playerLimit[1] < nMaxUses) return 0L;
 
-        if(playerTime[1] <= nMaxUses) return 0L;
-
-        return (cooldownTime - (System.currentTimeMillis() - playerTime[0])) / 1000;    
+        return (cooldownTime - (System.currentTimeMillis() - playerLimit[0])) / 1000;    
     }
 
     private boolean isPastTime(long time){
@@ -61,9 +66,11 @@ public class RatelimitContainer {
     private void startCleanTask(Plugin plugin){
         plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, () -> {
             for(Entry<UUID, Long[]> entry : cooldownStore.entrySet()){
-                 if(this.isPastTime(entry.getValue()[0])){
+                long time = entry.getValue()[0];
+
+                if(time != 0L && this.isPastTime(time)){
                     this.removeCooldown(entry.getKey());
-                 }
+                }
             }
         }, 20L, 60L);
     }
