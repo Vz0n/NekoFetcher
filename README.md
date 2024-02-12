@@ -10,7 +10,7 @@ Plugin works using the [nekos.life](https://nekos.life) API endpoints to get ima
 
 To use the plugin, simply hold a filled map with something in your main hand and use the `/nget` command, a image of a neko will be applied to the map that you can use for decoration purposes.
 
-Main permissions are `nekofetcher.get` (/nget) and `nekofetcher.neko` (/neko), the last command is for help and reloading the plugin.
+Main permissions are `nekofetcher.nget` (/nget) and `nekofetcher.neko` (/neko), the last command is for help and reloading the plugin.
 
 Here's a preview of how the maps looks with images applied in-game:
 
