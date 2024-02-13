@@ -1,4 +1,4 @@
-# NekoFetcher
+![NekoFetcher logo](image/logo.png)
 
 (Not too) Simple plugin to fetch and draw cute anime neko images on in-game maps.
 
