@@ -18,7 +18,7 @@ Here's a preview of how the maps looks with images applied in-game:
 
 ## To-do features 
 
-- Add support for more API's and sites like Safebooru maybe
+- Add support for more APIs and sites like Safebooru maybe
 - Add Vault support
 - Make images persistent across restarts
 
