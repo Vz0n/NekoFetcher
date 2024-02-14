@@ -36,6 +36,8 @@ public class NekoFetcher extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        // Clear players from container, if there are
+        this.usesContainer.clearPlayers();
         getLogger().info("Plugin disabled!");
     }
 

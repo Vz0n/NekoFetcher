@@ -12,7 +12,7 @@ public class RatelimitContainer {
     // The value of the HashMap is a Long array where:
     // Value 0 is the timestamp when PlayerUses > nMaxUses was reached, if happened.
     // Value 1 is the amount of uses of the command.
-    private HashMap<UUID, Long[]> cooldownStore = new HashMap<>();
+    private HashMap<UUID, long[]> cooldownStore = new HashMap<>();
     private int cooldownTime;
     private int nMaxUses;
 
@@ -27,11 +27,11 @@ public class RatelimitContainer {
     public void addUse(UUID player){
 
         if(!this.cooldownStore.containsKey(player)){
-            this.cooldownStore.put(player, new Long[]{0L, 1L});
+            this.cooldownStore.put(player, new long[]{0L, 1L});
             return;
         }
 
-        Long[] playerLimit = this.cooldownStore.get(player);
+        long[] playerLimit = this.cooldownStore.get(player);
         playerLimit[1] = playerLimit[1] + 1L;
 
         // Player reached the max uses, so we assign a timestamp to identify 
@@ -50,9 +50,9 @@ public class RatelimitContainer {
     }
 
     // Returns the remaining time in seconds, in case that the player is ratelimited.
-    public Long getRatelimit(UUID player){
+    public long getRatelimit(UUID player){
 
-        Long[] playerLimit = cooldownStore.getOrDefault(player, new Long[]{0L, 0L});
+        long[] playerLimit = cooldownStore.getOrDefault(player, new long[]{0L, 0L});
     
         if(playerLimit[1] < nMaxUses) return 0L;
 
@@ -65,7 +65,7 @@ public class RatelimitContainer {
 
     private void startCleanTask(Plugin plugin){
         plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, () -> {
-            for(Entry<UUID, Long[]> entry : cooldownStore.entrySet()){
+            for(Entry<UUID, long[]> entry : cooldownStore.entrySet()){
                 long time = entry.getValue()[0];
 
                 if(time != 0L && this.isPastTime(time)){
