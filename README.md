@@ -26,8 +26,7 @@ Here's a preview of how the maps looks with images applied in-game:
 
 ## Compatibility and support
 
-- Software: Paper and its forks, as the plugin **only** uses and support that API. You can still test on plain Spigot but no support will be provided.
-- Version: 1.20.x supported only.
+This plugin has only been tested and guaranteed to work on the Paper server software (version 1.20.4), there's no guarantee or security that it will work on older Minecraft versions or different software.
 
 ## Compiling and installing
 
