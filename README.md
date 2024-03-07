@@ -4,7 +4,7 @@
 
 The main idea behind this, is fun and give some anime servers (if they exist) something with they can decorate stuff and have fun with. Although that the main reason of this plugin, you're free of adding it to your server's plugin list indepently of what the server is.
 
-Plugin works using the [nekos.life](https://nekos.life) API endpoints to get images, so if you have a outbound firewall add this site to the whitelist.
+Plugin works using the [nekos.life](https://nekos.life) API endpoints to get images, so if you have an outbound firewall add this site to the whitelist.
 
 ## Usage
 
@@ -38,6 +38,6 @@ You should have the plugin working now. Bugs can be reported on the issues secti
 
 ## License information
 
-This plugins is licensed under the GPLv3 license, please read [LICENSE](https://github.com/Vz0n/NekoFetcher/LICENSE) for more information.
+This plugin is licensed under the GPLv3 license, please read [LICENSE](https://github.com/Vz0n/NekoFetcher/LICENSE) for more information.
 
 Copyright © 2024 Vz0n. All rights reserved.
