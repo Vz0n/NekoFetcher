@@ -27,14 +27,13 @@ public class GetCommand implements CommandExecutor {
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
 
-        if(!(sender instanceof Player)){
+        if(!(sender instanceof Player player)){
             sender.sendMessage("You must be a player to use that command.");
             return false;
         }
 
         NekoConfiguration config = plugin.getNekoConfig();
         ImageProvider provider = plugin.getImageProvider();
-        Player player = (Player) sender;
 
         if(config.isCooldownEnabled()){
             long time = plugin.getUsesContainer().getRateLimit(player.getUniqueId());
