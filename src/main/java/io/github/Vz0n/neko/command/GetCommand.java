@@ -37,7 +37,7 @@ public class GetCommand implements CommandExecutor {
         Player player = (Player) sender;
 
         if(config.isCooldownEnabled()){
-            long time = plugin.getUsesContainer().getRatelimit(player.getUniqueId());
+            long time = plugin.getUsesContainer().getRateLimit(player.getUniqueId());
 
             if(time > 0L){
                 player.sendActionBar(config.getDecoratedMessage("error_ratelimited", 

@@ -9,7 +9,7 @@ import com.google.inject.Injector;
 import io.github.Vz0n.neko.command.GetCommand;
 import io.github.Vz0n.neko.command.NekoCommand;
 import io.github.Vz0n.neko.image.ImageProvider;
-import io.github.Vz0n.neko.module.AbstractNekoModule;
+import io.github.Vz0n.neko.inject.AbstractNekoModule;
 import io.github.Vz0n.neko.classes.NekoConfiguration;
 import io.github.Vz0n.neko.classes.RatelimitContainer;
 

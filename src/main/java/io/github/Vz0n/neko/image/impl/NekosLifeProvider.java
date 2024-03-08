@@ -8,7 +8,7 @@ import com.google.inject.Inject;
 
 import io.github.Vz0n.neko.NekoFetcher;
 import io.github.Vz0n.neko.image.ImageProvider;
-import io.github.Vz0n.neko.renderer.NekoRenderer;
+import io.github.Vz0n.neko.image.renderer.NekoRenderer;
 import io.github.Vz0n.neko.util.ImageUtil;
 
 public class NekosLifeProvider implements ImageProvider {

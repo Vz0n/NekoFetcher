@@ -1,4 +1,4 @@
-package io.github.Vz0n.neko.renderer;
+package io.github.Vz0n.neko.image.renderer;
 
 import org.bukkit.entity.Player;
 import org.bukkit.map.MapCanvas;
