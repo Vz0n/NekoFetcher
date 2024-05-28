@@ -1,6 +1,7 @@
 package io.github.Vz0n.neko.image.impl;
 
 import java.awt.image.BufferedImage;
+import java.util.Optional;
 
 import org.bukkit.map.MapView;
 
@@ -21,7 +22,7 @@ public class NekosLifeProvider implements ImageProvider {
       this.plugin = plugin;
     }
 
-    public MapView getImage(MapView map){
+    public Optional<MapView> getImage(MapView map){
 
         NekoRenderer renderer = new NekoRenderer();
             
@@ -42,12 +43,12 @@ public class NekosLifeProvider implements ImageProvider {
 
         // No image means an error ocurred, so
         // return the same object without modifications.
-        if(!renderer.hasImage()) return map;
+        if(!renderer.hasImage()) return Optional.empty();
           
         // Lock the map's player cursor.
         map.setLocked(true);
 
-        return map;
+        return Optional.of(map);
         
     }
 }

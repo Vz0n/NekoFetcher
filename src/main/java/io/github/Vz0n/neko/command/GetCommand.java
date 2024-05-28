@@ -16,6 +16,8 @@ import io.github.Vz0n.neko.image.ImageProvider;
 import io.github.Vz0n.neko.NekoFetcher;
 import io.github.Vz0n.neko.classes.NekoConfiguration;
 
+import java.util.Optional;
+
 public class GetCommand implements CommandExecutor {
 
     private NekoFetcher plugin;
@@ -57,13 +59,14 @@ public class GetCommand implements CommandExecutor {
         player.sendMessage(config.getDecoratedMessage("getting_neko_image"));
 
         MapMeta mapMeta = (MapMeta) item.getItemMeta();
-        MapView view = provider.getImage(mapMeta.getMapView());
+        Optional<MapView> view = provider.getImage(mapMeta.getMapView());
 
-        if(view.equals(mapMeta.getMapView())){
+        if(view.isEmpty()){
             player.sendMessage(config.getDecoratedMessage("error_getting_image"));
             return false;
         }
-              
+
+        mapMeta.setMapView(view.get());
         item.setItemMeta(mapMeta);
         player.sendMessage(config.getDecoratedMessage("success_getting_image"));
         

@@ -27,19 +27,14 @@ public class RatelimitContainer {
 
     public void addUse(UUID player){
 
-        if(!this.cooldownStore.containsKey(player)){
-            this.cooldownStore.put(player, new long[]{1L, 0L});
-            return;
-        }
-
-        long[] playerLimit = this.cooldownStore.get(player);
+        long[] playerLimit = this.cooldownStore.getOrDefault(player, new long[]{0L, 0L});
         playerLimit[0] = playerLimit[0] + 1L;
 
         // Player reached the max uses, so we assign a timestamp to identify 
         // when the limit was reached.
         if(playerLimit[0] >= maxUses) playerLimit[1] = System.currentTimeMillis();
-    
-        this.cooldownStore.replace(player, playerLimit);
+
+        this.cooldownStore.put(player, playerLimit);
     }
 
     private void removeCooldown(UUID player){
@@ -50,7 +45,7 @@ public class RatelimitContainer {
         this.cooldownStore.clear();
     }
 
-    // Returns the remaining time in seconds, in case that the player is rate limited.
+    // Returns the remaining time in seconds for the next use, in case that the player is rate limited.
     public long getRateLimit(UUID player){
 
         long[] playerLimit = cooldownStore.get(player);
