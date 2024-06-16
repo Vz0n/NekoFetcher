@@ -32,7 +32,7 @@ This plugin has only been tested and guaranteed to work on the Paper server soft
 
 Firstly, make sure that you have Git and Java (JDK) installed.
 
-Clone this repo using `git clone https://github.com/Vz0n/NekoFetcher`, then open a console on the source directory and run `./gradlew build` (Linux shell) or `.\gradlew.bat build` (Windows terminal) depending on your operating system. Next drop the jar built in `build/libs/NekoFetcher-x.x.x.jar` on your server's `plugins` folder and restart.
+Clone this repo using `git clone https://github.com/Vz0n/NekoFetcher`, then open a console on the source directory and run `./gradlew build` (Linux shell) or `.\gradlew.bat build` (Windows). Next drop the jar built in `build/libs/NekoFetcher-x.x.x.jar` on your server's `plugins` folder and restart.
 
 You should have the plugin working now. Bugs can be reported on the issues section.
 
