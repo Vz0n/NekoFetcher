@@ -4,7 +4,7 @@
 
 The main idea behind this, is fun and give some anime servers (if they exist) something with they can decorate stuff and have fun with. Although that the main reason of this plugin, you're free of adding it to your server's plugin list independently of what the server is.
 
-Plugin works using the [nekos.life](https://nekos.life) API endpoints to get images, so if you have an outbound firewall add this site to the whitelist.
+Plugin works using the [nekos.life](https://nekos.life) API endpoints to get images, so if you have an outbound firewall add this site.
 
 ## Usage
 
@@ -32,7 +32,7 @@ This plugin has only been tested and guaranteed to work on the Paper server soft
 
 Firstly, make sure that you have Git and Java (JDK) installed.
 
-Clone this repo using `git clone https://github.com/Vz0n/NekoFetcher`, then open a console on the source directory and run `./gradlew build` (Linux shell) or `.\gradlew.bat build` (Windows). Next drop the jar built in `build/libs/NekoFetcher-x.x.x.jar` on your server's `plugins` folder and restart.
+Clone this repo using `git clone https://github.com/Vz0n/NekoFetcher`, then open a console on the source directory and run `./gradlew build` (Linux) or `.\gradlew.bat build` (Windows). Next drop the compiled jar (`build/libs/NekoFetcher-all.jar`) in your server `plugins` folder and restart.
 
 You should have the plugin working now. Bugs can be reported on the issues section.
 
@@ -40,4 +40,4 @@ You should have the plugin working now. Bugs can be reported on the issues secti
 
 This plugin is licensed under the GPLv3 license, please read [LICENSE](https://github.com/Vz0n/NekoFetcher/LICENSE) for more information.
 
-Copyright © 2024 Vz0n. All rights reserved.
+Copyright © 2024 Vz0n.
