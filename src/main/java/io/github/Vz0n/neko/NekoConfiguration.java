@@ -1,5 +1,4 @@
-package io.github.Vz0n.neko.classes;
-
+package io.github.Vz0n.neko;
 
 import java.io.File;
 
@@ -16,7 +15,7 @@ public class NekoConfiguration {
     private File configFileHandle;
     private final MiniMessage MINI_MESSAGE = MiniMessage.miniMessage();
 
-    public NekoConfiguration(Plugin plugin){
+    public NekoConfiguration(NekoFetcher plugin){
         // Verify if the main config file exists before setting our
         // FileConfiguration to the plugin's one.
         File dataFolder = plugin.getDataFolder();
@@ -52,19 +51,17 @@ public class NekoConfiguration {
         return this.getDecoratedMessage(key, null, null);
     }
 
-    public int getCooldownTime(){
-
-        return configFile.getInt("cooldown.options.time", 520);
-    }
-
-    public int getImageLimit(){
-
-        return configFile.getInt("cooldown.options.imageLimit", 3);
-    }
-
     public boolean isCooldownEnabled(){
         
         return configFile.getBoolean("cooldown.enabled", true);
     }
-    
+
+    public int getCooldownTime(){
+        return configFile.getInt("cooldown.options.time", 520);
+    }
+
+    public int getImageRate(){
+        return configFile.getInt("cooldown.options.imageLimit", 3);
+    }
+
 }

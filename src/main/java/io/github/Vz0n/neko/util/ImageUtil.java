@@ -3,6 +3,7 @@ package io.github.Vz0n.neko.util;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 import javax.annotation.Nullable;
 
@@ -33,7 +34,7 @@ public class ImageUtil {
        
        return image;
 
-     } catch(IOException | ParseException e){
+     } catch(IOException | ParseException | URISyntaxException e){
         e.printStackTrace();
         return null;
      }

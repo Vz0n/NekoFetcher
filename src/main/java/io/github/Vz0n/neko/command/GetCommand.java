@@ -1,5 +1,6 @@
 package io.github.Vz0n.neko.command;
 
+import io.github.Vz0n.neko.component.impl.RatelimitContainer;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -14,7 +15,7 @@ import org.bukkit.entity.Player;
 
 import io.github.Vz0n.neko.image.ImageProvider;
 import io.github.Vz0n.neko.NekoFetcher;
-import io.github.Vz0n.neko.classes.NekoConfiguration;
+import io.github.Vz0n.neko.NekoConfiguration;
 
 import java.util.Optional;
 
@@ -36,9 +37,11 @@ public class GetCommand implements CommandExecutor {
 
         NekoConfiguration config = plugin.getNekoConfig();
         ImageProvider provider = plugin.getImageProvider();
+        RatelimitContainer usesContainer = (RatelimitContainer) plugin
+                .getNekoComponent(RatelimitContainer.class);
 
         if(config.isCooldownEnabled()){
-            long time = plugin.getUsesContainer().getRateLimit(player.getUniqueId());
+            long time = usesContainer.getRateLimit(player.getUniqueId());
 
             if(time > 0L){
                 player.sendActionBar(config.getDecoratedMessage("error_ratelimited", 
@@ -46,7 +49,7 @@ public class GetCommand implements CommandExecutor {
                 return false;
             }
 
-            plugin.getUsesContainer().addUse(player.getUniqueId());
+            usesContainer.addUse(player.getUniqueId());
         }
 
         ItemStack item = player.getInventory().getItemInMainHand();

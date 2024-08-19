@@ -10,7 +10,7 @@ Plugin works using the [nekos.life](https://nekos.life) API endpoints to get ima
 
 To use the plugin, simply hold a filled map with something in your main hand and use the `/nget` command, an image of a neko will be applied to the map that you can use for decoration purposes.
 
-Main permissions are `nekofetcher.nget` (/nget) and `nekofetcher.neko` (/neko), the last command is for help and reloading the plugin.
+Main permissions are `nekofetcher.get` (/nekoget) and `nekofetcher.neko` (/neko), the last command is for help and reloading the plugin.
 
 Here's a preview of how the maps looks with images applied in-game:
 
@@ -26,13 +26,13 @@ Here's a preview of how the maps looks with images applied in-game:
 
 ## Compatibility and support
 
-This plugin has only been tested and guaranteed to work on the Paper server software (latest Minecraft version), there's no guarantee or security that it will work on older Minecraft versions or different software.
+This plugin has only been tested and guaranteed to work on the Paper server software (latest Minecraft version, at this date is 1.21.1), there's no guarantee or security that it will work on older Minecraft versions or different software.
 
 ## Compiling and installing
 
 Firstly, make sure that you have Git and Java (JDK) installed.
 
-Clone this repo using `git clone https://github.com/Vz0n/NekoFetcher`, then open a console on the source directory and run `./gradlew build` (Linux) or `.\gradlew.bat build` (Windows). Next drop the compiled jar (`build/libs/NekoFetcher-all.jar`) in your server `plugins` folder and restart.
+Clone this repo using `git clone https://github.com/Vz0n/NekoFetcher`, then open a console on the source directory and run `./gradlew build` (Linux) or `.\gradlew.bat build` (Windows). Next put the compiled jar located in `build/libs/NekoFetcher-all.jar` on your server `plugins` folder and restart.
 
 You should have the plugin working now. Bugs can be reported on the issues section.
 

@@ -29,7 +29,7 @@ public class NekosLifeProvider implements ImageProvider {
         plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> {
               BufferedImage image = ImageUtil.getRESTProcessedImage(DEFAULT_ENDPOINT, "url");
               if(image == null){
-                plugin.getLogger().warning("Something went wrong while processing a image!");
+                plugin.getLogger().warning("Something went wrong while processing a image! Look above");
                 plugin.getLogger().warning("Check your internet connectivity or report to the developer.");
                 return;
               }

@@ -7,7 +7,7 @@ import org.bukkit.command.CommandSender;
 import com.google.inject.Inject;
 
 import io.github.Vz0n.neko.NekoFetcher;
-import io.github.Vz0n.neko.classes.NekoConfiguration;
+import io.github.Vz0n.neko.NekoConfiguration;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent.Builder;
 import net.kyori.adventure.text.format.TextColor;

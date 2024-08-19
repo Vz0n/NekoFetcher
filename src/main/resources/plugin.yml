@@ -1,5 +1,5 @@
 name: NekoFetcher
-version: 0.1
+version: 0.2
 author: Vz0n
 api-version: 1.13
 main: io.github.Vz0n.neko.NekoFetcher
@@ -8,9 +8,9 @@ commands:
   nget:
     aliases: [nekoget]
     description: "Get a neko image"
-    permission: "nekofetcher.nget"
+    permission: "nekofetcher.get"
   neko:
-    aliases: [nekofetcher, nekof]
+    aliases: [nekofetcher, neko]
     description: "Main NekoFetcher command."
     permission: "nekofetcher.neko"
     

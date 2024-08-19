@@ -1,13 +1,17 @@
-package io.github.Vz0n.neko.classes;
+package io.github.Vz0n.neko.component.impl;
 
 import java.util.HashMap;
-import java.util.Map.Entry;
+import java.util.Map;
 import java.util.UUID;
 
+import com.google.inject.Inject;
 import org.bukkit.plugin.Plugin;
 
+import io.github.Vz0n.neko.NekoFetcher;
+import io.github.Vz0n.neko.component.NekoComponent;
+
 // Class for storing player's cooldown/limit time to use /nget.
-public class RatelimitContainer {
+public class RatelimitContainer implements NekoComponent {
     
     // The value of the HashMap is a Long array where
     // Value 0 is the amount of uses of the command.
@@ -16,13 +20,18 @@ public class RatelimitContainer {
     private int cooldownTime;
     private int maxUses;
 
-    public RatelimitContainer(Plugin instance, NekoConfiguration config){
+    @Inject
+    public RatelimitContainer(NekoFetcher plugin){
+        this.init(plugin);
+        this.startCleanTask(plugin);
+    }
+
+    @Override
+    public void init(NekoFetcher instance){
         // Multiply by 1000 as the config is in seconds, we are working
         // with milliseconds.
-        this.cooldownTime = config.getCooldownTime() * 1000;
-        this.maxUses = config.getImageLimit();
-
-        this.startCleanTask(instance);
+        this.cooldownTime = instance.getNekoConfig().getCooldownTime() * 1000;
+        this.maxUses = instance.getNekoConfig().getImageRate();
     }
 
     public void addUse(UUID player){
@@ -56,17 +65,14 @@ public class RatelimitContainer {
                 ? 0L : (cooldownTime - (System.currentTimeMillis() - playerLimit[1])) / 1000;
     }
 
-    private boolean isPastTime(long time){
-        return (System.currentTimeMillis() - time) > this.cooldownTime;
-    }
-
     private void startCleanTask(Plugin plugin){
         plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, () -> {
-            for(Entry<UUID, long[]> entry : cooldownStore.entrySet()){
-                long[] playerEntry = entry.getValue();
+            for(Map.Entry<UUID, long[]> entry : this.cooldownStore.entrySet()){
+                long timestamp = entry.getValue()[1];
 
-                if(playerEntry[0] >= maxUses
-                        && this.isPastTime(playerEntry[1])) this.removeCooldown(entry.getKey());
+                if(getRateLimit(entry.getKey()) <= 0 && timestamp != 0L){
+                    this.removeCooldown(entry.getKey());
+                }
             }
         }, 20L, 60L);
     }
