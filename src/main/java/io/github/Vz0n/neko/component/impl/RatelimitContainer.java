@@ -22,16 +22,12 @@ public class RatelimitContainer implements NekoComponent {
 
     @Inject
     public RatelimitContainer(NekoFetcher plugin){
-        this.init(plugin);
         this.startCleanTask(plugin);
-    }
 
-    @Override
-    public void init(NekoFetcher instance){
         // Multiply by 1000 as the config is in seconds, we are working
         // with milliseconds.
-        this.cooldownTime = instance.getNekoConfig().getCooldownTime() * 1000;
-        this.maxUses = instance.getNekoConfig().getImageRate();
+        this.cooldownTime = plugin.getNekoConfig().getCooldownTime() * 1000;
+        this.maxUses = plugin.getNekoConfig().getImageRate();
     }
 
     public void addUse(UUID player){

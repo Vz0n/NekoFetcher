@@ -17,7 +17,7 @@ public class ImageUtil {
     // are small. Finally return the pixel array to pass the image
     // asynchronously.
     @Nullable
-    public static BufferedImage getRESTProcessedImage(String url, String field){
+    public static BufferedImage getRESTImage(String url, String field){
 
      try{
        
@@ -28,6 +28,7 @@ public class ImageUtil {
        
        if(image == null) return null;
 
+       // Rescale image to fit into Minecraft maps
        Graphics graphics = image.getGraphics();
        graphics.drawImage(image, 0, 0, 128, 128, null);
        graphics.dispose();

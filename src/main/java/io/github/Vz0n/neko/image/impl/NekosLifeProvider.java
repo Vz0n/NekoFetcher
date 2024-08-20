@@ -27,7 +27,7 @@ public class NekosLifeProvider implements ImageProvider {
         NekoRenderer renderer = new NekoRenderer();
             
         plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> {
-              BufferedImage image = ImageUtil.getRESTProcessedImage(DEFAULT_ENDPOINT, "url");
+              BufferedImage image = ImageUtil.getRESTImage(DEFAULT_ENDPOINT, "url");
               if(image == null){
                 plugin.getLogger().warning("Something went wrong while processing a image! Look above");
                 plugin.getLogger().warning("Check your internet connectivity or report to the developer.");

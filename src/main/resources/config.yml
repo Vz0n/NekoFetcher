@@ -4,11 +4,12 @@
 # Main plugin prefix and messages
 prefix: "<#4a11b0>Neko<#a7d11d>Fetcher<reset> |"
 messages:
-  neko_command_header: "%prefix% <i><gray>This server is using NekoFetcher, a plugin made by Vz0n."
-  neko_command_reload: "%prefix% <green>Plugin was reloaded succesfully OwU!"
+  neko_command_version: "%prefix% <#532cf0>Version of the plugin: %version%"
+  neko_command_reload: "%prefix% <green>Plugin was successfully reloaded OwU!"
   neko_command_help: |
     %prefix% <aqua>Plugin help</aqua>
-     /nget - <gold>Get a image of a cute neko uwu</gold>
+     /nget - <gold>Get an image of a cute neko uwu</gold>
+     /neko version - <gold>Get the plugin's version</gold>
      /neko reload - <gold>Reloads the plugin</gold>
   filled_map_not_in_hand: "%prefix% <red>You need to have a filled map on your hand."
   getting_neko_image: "%prefix% <i><gray>Getting your image..."
