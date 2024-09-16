@@ -40,7 +40,7 @@ public class NekoFetcher extends JavaPlugin {
                 this.getLogger().severe("One or more components failed to load!");
                 this.getLogger().info(String.format("While loading %s: %s", c.getCanonicalName(),
                         e.getMessage()));
-                this.getLogger().info("If this is a bug, report it to the plugin developer");
+                this.getLogger().info("If this seems a bug, report it to the plugin developer");
                 this.getLogger().info("Plugin will be disabled.");
 
                 // Not the best way tho
