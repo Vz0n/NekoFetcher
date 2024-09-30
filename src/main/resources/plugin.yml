@@ -1,9 +1,11 @@
 name: NekoFetcher
-version: 0.2
+version: 0.3
 author: Vz0n
 api-version: 1.13
 main: io.github.Vz0n.neko.NekoFetcher
 description: 'Get neko images in your maps.'
+softdepend:
+  - Vault
 commands:
   nget:
     aliases: [nekoget]

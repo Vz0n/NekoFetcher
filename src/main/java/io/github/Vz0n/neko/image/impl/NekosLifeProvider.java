@@ -1,9 +1,7 @@
 package io.github.Vz0n.neko.image.impl;
 
 import java.awt.image.BufferedImage;
-import java.util.Optional;
-
-import org.bukkit.map.MapView;
+import java.util.concurrent.Future;
 
 import com.google.inject.Inject;
 
@@ -22,33 +20,20 @@ public class NekosLifeProvider implements ImageProvider {
       this.plugin = plugin;
     }
 
-    public Optional<MapView> getImage(MapView map){
+    public NekoRenderer getNewImageRenderer(){
 
         NekoRenderer renderer = new NekoRenderer();
-            
-        plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> {
-              BufferedImage image = ImageUtil.getRESTImage(DEFAULT_ENDPOINT, "url");
-              if(image == null){
-                plugin.getLogger().warning("Something went wrong while processing a image! Look above");
-                plugin.getLogger().warning("Check your internet connectivity or report to the developer.");
-                return;
-              }
+        BufferedImage image = ImageUtil.getRESTImage(DEFAULT_ENDPOINT, "url");
 
-              // Set the renderer image and clear other renderers.
-              renderer.setImage(image);
+        if(image == null){
+            plugin.getLogger().warning("Something went wrong while processing a image! Look above");
+            plugin.getLogger().warning("Check your internet connectivity or report to the developer.");
+            return renderer;
+        }
 
-              map.getRenderers().clear();
-              map.addRenderer(renderer);
-        });
+        // Set the renderer image and clear other renderers.
+        renderer.setImage(image);
 
-        // No image means an error ocurred, so
-        // return the same object without modifications.
-        if(!renderer.hasImage()) return Optional.empty();
-          
-        // Lock the map's player cursor.
-        map.setLocked(true);
-
-        return Optional.of(map);
-        
+        return renderer;
     }
 }

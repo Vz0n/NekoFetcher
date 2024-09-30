@@ -1,5 +1,6 @@
 # NekoFetcher v0.1 by Vz0n
 # Edit config as you want, just read the description of every option!
+# Note that if a setting key is missing, the plugin will use its default value.
 #
 # Main plugin prefix and messages
 prefix: "<#4a11b0>Neko<#a7d11d>Fetcher<reset> |"
@@ -13,10 +14,13 @@ messages:
      /neko reload - <gold>Reloads the plugin</gold>
   filled_map_not_in_hand: "%prefix% <red>You need to have a filled map on your hand."
   getting_neko_image: "%prefix% <i><gray>Getting your image..."
-  success_getting_image: "%prefix% <red>Something didn't go well..."
+  success_getting_image: "%prefix% <green>Go with your neko UwU!"
   error_ratelimited: "%prefix% <red>You can get a new neko image on %time% seconds."
-  error_getting_image: "%prefix% <green>Go with your neko UwU!"
+  error_getting_image: "%prefix% <red>Something didn't go well... "
+  no_money: "%prefix% <red>You don't have the necessary money to buy an Neko image"
+  purchased_image: "%prefix% <green>You purchased a Neko image by %money%"
 
+# Cooldown module
 # We should limit player's command usages per an amount of time?
 # Suggestion: Keep this enabled
 cooldown:
@@ -26,6 +30,14 @@ cooldown:
     time: 520
     # Limit of images that can be obtained during time
     imageLimit: 3
+
+# Economy module
+# It's obvious to say that this requires Vault
+# Also note: This is useless right now as maps gets lost when you restart the server
+economy:
+  enabled: false
+  # How much money costs getting a single map with a Neko girl image
+  map_price: 300.0
 
 
 # Don't edit this, it will cause an error. 

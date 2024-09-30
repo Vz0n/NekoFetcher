@@ -1,6 +1,9 @@
 package io.github.Vz0n.neko;
 
+import io.github.Vz0n.neko.component.impl.NekoLoader;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+import net.milkbowl.vault.economy.Economy;
 
 import com.google.common.collect.ImmutableList;
 import com.google.inject.Guice;
@@ -21,10 +24,12 @@ public class NekoFetcher extends JavaPlugin {
 
     @Inject private NekoConfiguration config;
     @Inject private ImageProvider provider;
+    private RegisteredServiceProvider<Economy> economyService = null;
 
     private ArrayList<NekoComponent> loadedComponents = new ArrayList<>();
     private final ImmutableList<Class<? extends NekoComponent>> componentClassList = ImmutableList.of(
-            RatelimitContainer.class
+            RatelimitContainer.class,
+            NekoLoader.class
     );
 
     @Override
@@ -37,15 +42,27 @@ public class NekoFetcher extends JavaPlugin {
             try {
                 loadedComponents.add(injector.getInstance(c));
             } catch(Exception e){
-                this.getLogger().severe("One or more components failed to load!");
-                this.getLogger().info(String.format("While loading %s: %s", c.getCanonicalName(),
+                getLogger().severe("One or more components failed to load!");
+                getLogger().info(String.format("While loading %s: %s", c.getCanonicalName(),
                         e.getMessage()));
-                this.getLogger().info("If this seems a bug, report it to the plugin developer");
-                this.getLogger().info("Plugin will be disabled.");
+                getLogger().info("If this seems a bug, report it to the plugin developer");
+                getLogger().info("Plugin will be disabled.");
 
-                // Not the best way tho
-                this.setEnabled(false);
+                getServer().getPluginManager().disablePlugin(this);
                 return;
+            }
+        }
+
+        // Register economy service if available
+        if(getServer().getPluginManager().isPluginEnabled("Vault") &&
+                this.config.isSettingEnabled("economy", false)){
+            getLogger().info("Enabling economy...");
+            this.economyService = getServer().getServicesManager().getRegistration(Economy.class);
+
+            if(this.economyService != null){
+                getLogger().info("Using economy: " + this.economyService.getProvider().getName());
+            } else {
+                getLogger().warning("Failed to enable Economy!");
             }
         }
 
@@ -76,6 +93,11 @@ public class NekoFetcher extends JavaPlugin {
 
         // The module is not active, so just return null
         return null;
+    }
+
+    @Nullable
+    public Economy getEconomy(){
+        return this.economyService != null ? this.economyService.getProvider() : null;
     }
 
     public NekoConfiguration getNekoConfig() {

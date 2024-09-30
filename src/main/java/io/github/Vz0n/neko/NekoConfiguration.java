@@ -51,13 +51,16 @@ public class NekoConfiguration {
         return this.getDecoratedMessage(key, null, null);
     }
 
-    public boolean isCooldownEnabled(){
-        
-        return configFile.getBoolean("cooldown.enabled", true);
+    public boolean isSettingEnabled(String setting, boolean def){
+        return this.configFile.getBoolean(setting + ".enabled", def);
     }
 
     public int getCooldownTime(){
         return configFile.getInt("cooldown.options.time", 520);
+    }
+
+    public double getImagePrice(){
+        return configFile.getDouble("economy.map_price", 300.0);
     }
 
     public int getImageRate(){
