@@ -13,7 +13,7 @@ messages:
      /neko version - <gold>Get the plugin's version</gold>
      /neko reload - <gold>Reloads the plugin</gold>
   filled_map_not_in_hand: "%prefix% <red>You need to have a filled map on your hand."
-  getting_neko_image: "%prefix% <i><gray>Getting your image..."
+  getting_neko_image: "%prefix% <i><gray>Getting your image... this may take a while"
   success_getting_image: "%prefix% <green>Go with your neko UwU!"
   error_ratelimited: "%prefix% <red>You can get a new neko image on %time% seconds."
   error_getting_image: "%prefix% <red>Something didn't go well... "
