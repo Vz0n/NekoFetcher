@@ -1,7 +1,7 @@
-# NekoFetcher v0.1 by Vz0n
+# NekoFetcher by Vz0n
 # Edit config as you want, just read the description of every option!
 # Note that if a setting key is missing, the plugin will use its default value.
-#
+
 # Main plugin prefix and messages
 prefix: "<#4a11b0>Neko<#a7d11d>Fetcher<reset> |"
 messages:
@@ -10,7 +10,7 @@ messages:
   neko_command_help: |
     %prefix% <aqua>Plugin help</aqua>
      /nget - <gold>Get an image of a cute neko uwu</gold>
-     /neko version - <gold>Get the plugin's version</gold>
+     /neko version - <gold>Get the plugin version</gold>
      /neko reload - <gold>Reloads the plugin</gold>
   filled_map_not_in_hand: "%prefix% <red>You need to have a filled map on your hand."
   getting_neko_image: "%prefix% <i><gray>Getting your image... this may take a while"

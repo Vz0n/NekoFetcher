@@ -13,9 +13,9 @@ import io.github.Vz0n.neko.component.NekoComponent;
 // Class for storing player's cooldown/limit time to use /nget.
 public class RatelimitContainer implements NekoComponent {
     
-    // The value of the HashMap is a Long array where
-    // Value 0 is the amount of uses of the command.
-    // Value 1 is the timestamp when PlayerUses > nMaxUses was reached, if happened.
+    // The value of the HashMap is a two elements array where
+    // First element is the amount of uses of the command.
+    // Second element is the timestamp when PlayerUses > nMaxUses was reached, if happened.
     private HashMap<UUID, long[]> cooldownStore = new HashMap<>();
     private int cooldownTime;
     private int maxUses;
