@@ -26,7 +26,7 @@ public class NekosLifeProvider implements ImageProvider {
 
         if(image == null){
             plugin.getLogger().warning("Something went wrong while processing an image! Look above");
-            plugin.getLogger().warning("Check your internet connectivity or report to the developer.");
+            plugin.getLogger().warning("Check your internet connectivity or if the provider servers are up.");
             return renderer;
         }
 

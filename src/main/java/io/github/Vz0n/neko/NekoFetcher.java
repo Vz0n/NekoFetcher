@@ -46,7 +46,7 @@ public class NekoFetcher extends JavaPlugin {
                 getLogger().info(String.format("While loading %s: %s", c.getCanonicalName(),
                         e.getMessage()));
                 getLogger().info("If this seems a bug, report it to the plugin developer");
-                getLogger().info("Plugin will be disabled.");
+                getLogger().info("The plugin will be disabled.");
 
                 getServer().getPluginManager().disablePlugin(this);
                 return;
@@ -62,7 +62,7 @@ public class NekoFetcher extends JavaPlugin {
             if(this.economyService != null){
                 getLogger().info("Using economy: " + this.economyService.getProvider().getName());
             } else {
-                getLogger().warning("Failed to enable Economy!");
+                getLogger().warning("Failed to enable economy!");
             }
         }
 
