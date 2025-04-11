@@ -1,6 +1,5 @@
 package io.github.Vz0n.neko.util;
 
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
@@ -8,7 +7,6 @@ import java.net.URISyntaxException;
 import java.net.URL;
 
 import javax.annotation.Nullable;
-import javax.imageio.ImageIO;
 import javax.net.ssl.HttpsURLConnection;
 
 import org.json.simple.JSONObject;
@@ -18,13 +16,12 @@ import org.json.simple.parser.ParseException;
 public class HttpUtil {
 
     @Nullable
-    public static JSONObject getJSONResponse(String url) throws IOException, ParseException, URISyntaxException {
+    public static JSONObject getJSONResponse(URL url) throws IOException, ParseException, URISyntaxException {
 
           JSONParser parser = new JSONParser();
 
           // Create URI and connection
-          URL urlObj = new URI(url).toURL();
-          HttpsURLConnection httpsConn = (HttpsURLConnection) urlObj.openConnection();
+          HttpsURLConnection httpsConn = (HttpsURLConnection) url.openConnection();
 
           // Server is not available
           if(httpsConn.getResponseCode() != 200) return null;
@@ -39,15 +36,14 @@ public class HttpUtil {
     }
  
     @Nullable
-    public static BufferedImage getImage(String url) throws IOException, URISyntaxException {
+    public static InputStream getImage(URL url) throws IOException, URISyntaxException {
 
-        URL urlObj = new URI(url).toURL();
-        HttpsURLConnection httpsConn = (HttpsURLConnection) urlObj.openConnection();
+        HttpsURLConnection httpsConn = (HttpsURLConnection) url.openConnection();
 
-        // Response isn't a image and/or server is unavailable.
+        // Response isn't an image and/or server is unavailable.
         if(!httpsConn.getContentType().startsWith("image/")) return null;
 
-        return ImageIO.read(httpsConn.getInputStream());
+        return httpsConn.getInputStream();
 
     }
 

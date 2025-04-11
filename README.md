@@ -20,6 +20,7 @@ Here's a preview of how the maps looks with images applied in-game:
 
 - Add support for more APIs and sites like Safebooru maybe
 - Make images persistent across restarts
+- NSFW mode maybe?
 
 *Yes, that's all*
 

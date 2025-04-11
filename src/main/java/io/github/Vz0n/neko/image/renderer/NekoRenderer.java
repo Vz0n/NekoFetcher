@@ -23,7 +23,8 @@ public class NekoRenderer extends MapRenderer {
         this.image = newImage;
     }
 
-    public boolean hasImage(){
-        return image != null;
+    public Image getImage(){
+        return this.image;
     }
+
 }

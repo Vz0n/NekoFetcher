@@ -1,10 +1,12 @@
 package io.github.Vz0n.neko.image;
 
-import io.github.Vz0n.neko.image.renderer.NekoRenderer;
-
+import java.net.URL;
 
 public interface ImageProvider {
 
-    NekoRenderer getNewImageRenderer();
+    /*
+    Get a new image URL
+    * */
+    URL getNewImageURL();
     
 }
