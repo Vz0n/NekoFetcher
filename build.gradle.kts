@@ -10,6 +10,12 @@ plugins {
     id("com.gradleup.shadow") version "8.3.0"
 }
 
+configurations.all {
+    resolutionStrategy.capabilitiesResolution.withCapability("org.bukkit:bukkit"){
+        select("org.bukkit:bukkit:1.21.4-R0.1-SNAPSHOT")
+    }
+}
+
 version = "0.3"
 
 repositories {
@@ -19,11 +25,11 @@ repositories {
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.21.3-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT")
+    compileOnly("net.kyori:adventure-api:4.21.0")
     compileOnly("com.github.MilkBowl:VaultAPI:1.7")
     implementation("com.google.inject:guice:7.0.0")
 }
-
 
 tasks {
     build{
