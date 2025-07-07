@@ -19,16 +19,14 @@ public class EconomyManager implements NekoComponent {
                                      .getRegistration(Economy.class).getProvider();
     }
 
-    public double getMoney(Player p){
-        return eco.getBalance(p);
-    }
-
-    public int withdrawMoney(Player p, double money){
-        if(this.getMoney(p) < money) return -1;
-
+    public boolean withdrawMoney(Player p, double money){
         EconomyResponse resp = eco.withdrawPlayer(p, money);
 
-        return resp.transactionSuccess() ? 1 : 0;
+        return resp.transactionSuccess();
+    }
+
+    public boolean hasMoney(Player p, double money){
+        return eco.has(p, money);
     }
 
     public String formatBalance(double money){

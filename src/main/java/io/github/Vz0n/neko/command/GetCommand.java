@@ -46,7 +46,7 @@ public class GetCommand implements CommandExecutor {
         ItemStack item = player.getInventory().getItemInMainHand();
         double price = config.getImagePrice();
 
-        if(eco != null && eco.getMoney(player) < price){
+        if(eco != null && !eco.hasMoney(player, price)){
             player.sendMessage(config.getDecoratedMessage("no_money"));
             return false;
         }
@@ -77,8 +77,13 @@ public class GetCommand implements CommandExecutor {
                 return;
             }
 
-            if(eco != null){
-                 eco.withdrawMoney(player, price);
+            if(eco != null) {
+                 if(!eco.withdrawMoney(player, price)){
+                     player.sendMessage(config.getDecoratedMessage(
+                             "error_purchasing_image", "%money%", eco.formatBalance(price)));
+                     return;
+                 }
+
                  player.sendMessage(config.getDecoratedMessage("purchased_image", "%money%",
                          eco.formatBalance(price)));
             }
