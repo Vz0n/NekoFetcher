@@ -39,6 +39,13 @@ public class ImageManager implements NekoComponent {
         if(!this.cacheDir.exists()) cacheDir.mkdir();
     }
 
+    private boolean isImageInStorage(String filename, String extension){
+        String hash = StringUtils.computeHash(filename);
+        File cacheFile = new File(cacheDir, hash + extension);
+
+        return cacheFile.exists();
+    }
+
     /**
      * Saves a map to the disk
      *
@@ -110,10 +117,13 @@ public class ImageManager implements NekoComponent {
 
         String[] pathParts = url.getFile().split("/");
         // The last part of the filepath it's the filename
-        String filename = pathParts[pathParts.length - 1];
+        String file = pathParts[pathParts.length - 1];
 
-        int dotPos = filename.indexOf('.');
-        String extension = filename.substring(dotPos);
+        int dotPos = file.indexOf('.');
+
+        // Extract both the name and extension
+        String filename = file.substring(0, dotPos - 1);
+        String extension = file.substring(dotPos);
 
         if(isImageInStorage(filename, extension)){
             return this.getRendererWithImage(filename, extension);
@@ -145,12 +155,5 @@ public class ImageManager implements NekoComponent {
 
             return Optional.empty();
         }
-    }
-
-    private boolean isImageInStorage(String filename, String extension){
-        String hash = StringUtils.computeHash(filename);
-        File cacheFile = new File(cacheDir, hash + extension);
-
-        return cacheFile.exists();
     }
 }

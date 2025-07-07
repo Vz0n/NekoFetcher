@@ -13,12 +13,12 @@ messages:
      /neko version - <gold>Get the plugin version</gold>
      /neko reload - <gold>Reloads the plugin</gold>
   filled_map_not_in_hand: "%prefix% <red>You need to have a filled map on your hand."
-  getting_neko_image: "%prefix% <i><gray>Getting your image... this may take a while"
+  getting_neko_image: "%prefix% <i><gray>Getting your image, this may take a while..."
   success_getting_image: "%prefix% <green>Go with your neko UwU!"
   error_ratelimited: "%prefix% <red>You can get a new neko image on %time% seconds."
-  error_getting_image: "%prefix% <red>Something didn't go well... "
-  no_money: "%prefix% <red>You don't have the necessary money to buy an Neko image"
-  purchased_image: "%prefix% <green>You purchased a Neko image by %money%"
+  error_getting_image: "%prefix% <red>Something didn't go well... contact server admins if this keeps happening."
+  no_money: "%prefix% <red>You don't have money to buy a neko image."
+  purchased_image: "%prefix% <green>You purchased a neko image for %money%."
 
 # Cooldown module
 # We should limit player's command usages per an amount of time?
@@ -36,9 +36,8 @@ cooldown:
 # Also note: This is useless right now as maps gets lost when you restart the server
 economy:
   enabled: false
-  # How much money costs getting a single map with a Neko girl image
+  # How much money costs getting a single map with a neko girl image
   map_price: 300.0
 
-
-# Don't edit this, it will cause an error. 
+# Don't edit this.
 version: 1.0

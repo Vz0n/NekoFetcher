@@ -37,15 +37,17 @@ public class GetCommand implements CommandExecutor {
             return false;
         }
 
-        NekoConfiguration config = plugin.getNekoConfig();
+        EconomyManager eco = (EconomyManager) plugin.getNekoComponent(EconomyManager.class);
         ImageManager manager = (ImageManager) plugin.getNekoComponent(ImageManager.class);
         RatelimitContainer usesContainer = (RatelimitContainer) plugin
                 .getNekoComponent(RatelimitContainer.class);
 
+        NekoConfiguration config = plugin.getNekoConfig();
         ItemStack item = player.getInventory().getItemInMainHand();
+        double price = config.getImagePrice();
 
-        if(item.getType() != Material.FILLED_MAP){
-            player.sendMessage(config.getDecoratedMessage("filled_map_not_in_hand"));
+        if(eco != null && eco.getMoney(player) < price){
+            player.sendMessage(config.getDecoratedMessage("no_money"));
             return false;
         }
 
@@ -59,27 +61,24 @@ public class GetCommand implements CommandExecutor {
             }
         }
 
+        if(item.getType() != Material.FILLED_MAP){
+            player.sendMessage(config.getDecoratedMessage("filled_map_not_in_hand"));
+            return false;
+        }
+
         MapView view = ((MapMeta) item.getItemMeta()).getMapView();
         player.sendMessage(config.getDecoratedMessage("getting_neko_image"));
 
         plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> {
             Optional<NekoRenderer> result = manager.getRendererWithImage();
 
-            if(result.isEmpty()){
-                 player.sendMessage(config.getDecoratedMessage("error_getting_image"));
-                 return;
+            if(result.isEmpty()) {
+                player.sendMessage(config.getDecoratedMessage("error_getting_image"));
+                return;
             }
 
-            EconomyManager eco = (EconomyManager) plugin.getNekoComponent(EconomyManager.class);
-
             if(eco != null){
-                 double price = config.getImagePrice();
-
-                 if(eco.withdrawMoney(player, price) == -1) {
-                         player.sendMessage(config.getDecoratedMessage("no_money"));
-                         return;
-                 }
-
+                 eco.withdrawMoney(player, price);
                  player.sendMessage(config.getDecoratedMessage("purchased_image", "%money%",
                          eco.formatBalance(price)));
             }

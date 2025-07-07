@@ -2,7 +2,6 @@ package io.github.Vz0n.neko.util;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 

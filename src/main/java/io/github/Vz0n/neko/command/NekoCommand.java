@@ -31,7 +31,7 @@ public class NekoCommand implements CommandExecutor {
            case "version" -> message.append(config.getDecoratedMessage(
                    "neko_command_version",
                    "%version%",
-                   plugin.getPluginMeta().getVersion()
+                   plugin.getDescription().getVersion()
            ));
            case "reload" -> {
                plugin.reloadNekoConfig();
