@@ -26,7 +26,7 @@ Here's a preview of how the maps looks with images applied in-game:
 
 ## Compatibility and support
 
-This plugin has only been tested and guaranteed to work on the Paper server software (latest Minecraft version, at this date is 1.21.4), there's no guarantee or security that it will work on older Minecraft versions or different software.
+This plugin will be updated to work only on the latest Paper server software, there's no guarantee that it will work on older Minecraft versions or different software.
 
 ## Compiling and installing
 
@@ -40,4 +40,4 @@ You should have the plugin working now. Bugs can be reported on the issues secti
 
 This plugin is licensed under the GPLv3 license, please read [LICENSE](https://github.com/Vz0n/NekoFetcher/LICENSE) for more information.
 
-Copyright © 2024 Vz0n.
+Copyright © 2025 Vz0n.
