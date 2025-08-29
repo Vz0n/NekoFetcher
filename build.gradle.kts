@@ -12,7 +12,7 @@ plugins {
 
 configurations.all {
     resolutionStrategy.capabilitiesResolution.withCapability("org.bukkit:bukkit"){
-        select("io.papermc.paper:paper-api:1.21.7-R0.1-SNAPSHOT")
+        select("io.papermc.paper:paper-api:1.21.8-R0.1-SNAPSHOT")
     }
 }
 
@@ -25,8 +25,8 @@ repositories {
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.21.7-R0.1-SNAPSHOT")
-    compileOnly("net.kyori:adventure-text-minimessage:4.22.0")
+    compileOnly("io.papermc.paper:paper-api:1.21.8-R0.1-SNAPSHOT")
+    compileOnly("net.kyori:adventure-text-minimessage:4.24.0")
     compileOnly("com.github.MilkBowl:VaultAPI:1.7")
     compileOnly("com.googlecode.json-simple:json-simple:1.1")
     implementation("com.google.inject:guice:7.0.0")
