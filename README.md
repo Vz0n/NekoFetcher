@@ -39,5 +39,3 @@ You should have the plugin working now. Bugs can be reported on the issues secti
 ## License information
 
 This plugin is licensed under the GPLv3 license, please read [LICENSE](https://github.com/Vz0n/NekoFetcher/LICENSE) for more information.
-
-Copyright © 2025 Vz0n.
